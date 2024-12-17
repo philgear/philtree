@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phil's Link Tree</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Phil's Link Tree</h1>
+    </header>
+    
+    <main>
+        <section id="websites">
+            <h2>My Websites</h2>
+            <ul>
+                {{range .Websites}}
+                <li><a href="{{.URL}}">{{.Title}}</a></li>
+                {{end}}
+            </ul>
+        </section>
+
+        <section id="social-media">
+            <h2>Social Media</h2>
+            <ul>
+                {{range .SocialMedia}}
+                <li><a href="{{.URL}}">{{.Title}}</a></li>
+                {{end}}
+            </ul>
+        </section>
+
+        <section id="affiliate-links">
+            <h2>Affiliate Links</h2>
+            <ul>
+                {{range .AffiliateLinks}}
+                <li><a href="{{.URL}}">{{.Title}}</a></li>
+                {{end}}
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Phil's Link Tree</p>
+    </footer>
+</body>
+</html>

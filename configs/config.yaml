@@ -1,0 +1,35 @@
+server:
+  port: "8080"
+  host: "localhost"
+
+websites:
+  - name: "Self Employment"
+    url: "https://philgear.biz"
+  - name: "Artistic Development Portfolio"
+    url: "https://geararts.dev"
+  - name: "Photography Portfolio"
+    url: "https://philgearphotography.com"
+
+social_media:
+  - platform: "BlueSky"
+    url: "https://bsky.app/philgear"
+  - platform: "LinkedIn"
+    url: "https://linkedin.com/in/philgear"
+  - platform: "GitHub"
+    url: "https://github.com/philgear"
+
+affiliate_links:
+  - name: "Amazon Associates"
+    url: "https://amazon.com/philgear-20"
+  - name: "Udemy Courses"
+    url: "https://udemy.com/myaffiliate"
+
+design:
+  primary_color: "#6200EE"
+  secondary_color: "#03DAC6"
+  tertiary_color: "#018786"
+  font_family: "Roboto, sans-serif"
+
+features:
+  enable_dark_mode: true
+  enable_analytics: false
