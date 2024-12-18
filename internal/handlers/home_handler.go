@@ -15,12 +15,10 @@ func HomeHandler(ls *services.LinkService) http.HandlerFunc {
 		data := struct {
 			Websites       []services.Website
 			SocialMedia    []services.SocialMedia
-			AffiliateLinks []services.AffiliateLink
 			LastUpdated    string
 		}{
 			Websites:       ls.Websites,
 			SocialMedia:    ls.SocialMedia,
-			AffiliateLinks: ls.AffiliateLinks,
 			LastUpdated:    time.Now().Format("2006-01-02"),
 		}
 

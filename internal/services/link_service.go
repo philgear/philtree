@@ -5,17 +5,15 @@ import "github.com/philgear/philtree/internal/config"
 
 // LinkService holds data for websites, social media, and affiliate links
 type LinkService struct {
-	Websites       []Website
-	SocialMedia    []SocialMedia
-	AffiliateLinks []AffiliateLink
+	Websites    []Website
+	SocialMedia []SocialMedia
 }
 
 // NewLinkService creates a new LinkService instance from the given configuration
 func NewLinkService(cfg *config.Config) *LinkService {
 	return &LinkService{
-		Websites:       convertWebsites(cfg.Websites),
-		SocialMedia:    convertSocialMedia(cfg.SocialMedia),
-		AffiliateLinks: convertAffiliateLinks(cfg.AffiliateLinks),
+		Websites:    convertWebsites(cfg.Websites),
+		SocialMedia: convertSocialMedia(cfg.SocialMedia),
 	}
 }
 
@@ -43,14 +41,6 @@ func convertSocialMedia(cfgSocialMedia []config.SocialMedia) []SocialMedia {
 		}
 	}
 	return socialMedia
-}
-
-func convertAffiliateLinks(cfgAffiliateLinks []config.AffiliateLink) []AffiliateLink {
-	affiliateLinks := make([]AffiliateLink, len(cfgAffiliateLinks))
-	for i, a := range cfgAffiliateLinks {
-		affiliateLinks[i] = AffiliateLink(a)
-	}
-	return affiliateLinks
 }
 
 // FormattedLastUpdate returns the LastUpdate formatted as a string

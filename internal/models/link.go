@@ -20,12 +20,6 @@ type SocialMediaLink struct {
 	Platform string
 }
 
-// AffiliateLink represents an affiliate marketing link
-type AffiliateLink struct {
-	Link
-	Program string
-}
-
 // NewWebsite creates a new Website instance
 func NewWebsite(title, url, description, category string) Website {
 	return Website{
@@ -48,18 +42,5 @@ func NewSocialMediaLink(title, url, platform string) SocialMediaLink {
 			Icon:  platform + "-icon", // e.g., "twitter-icon"
 		},
 		Platform: platform,
-	}
-}
-
-// NewAffiliateLink creates a new AffiliateLink instance
-func NewAffiliateLink(title, url, description, program string) AffiliateLink {
-	return AffiliateLink{
-		Link: Link{
-			Title:       title,
-			URL:         url,
-			Description: description,
-			Icon:        "affiliate-icon", // You can customize this
-		},
-		Program: program,
 	}
 }

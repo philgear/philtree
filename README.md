@@ -8,7 +8,6 @@ PhilTree is your personal digital arboretum where you can plant and nurture your
 
 - 🌐 Websites
 - 📱 Social Media Profiles
-- 💰 Affiliate Links
 - 📚 And more!
 
 No more fumbling through bookmarks or forgetting that awesome site you found last week. With PhilTree, all your links are just a branch away!

@@ -33,20 +33,10 @@ func (s *LinkService) GetSocialMediaLinks() []models.SocialMediaLink {
 	return socialLinks
 }
 
-// GetAffiliateLinks returns all affiliate links
-func (s *LinkService) GetAffiliateLinks() []models.AffiliateLink {
-	affiliateLinks := make([]models.AffiliateLink, len(s.cfg.AffiliateLinks))
-	for i, al := range s.cfg.AffiliateLinks {
-		affiliateLinks[i] = models.NewAffiliateLink(al.Name, al.URL, "", al.Name) // Add a description if available in your config
-	}
-	return affiliateLinks
-}
-
 // GetAllLinks returns all links categorized
 func (s *LinkService) GetAllLinks() map[string]interface{} {
 	return map[string]interface{}{
-		"websites":       s.GetWebsites(),
-		"socialMedia":    s.GetSocialMediaLinks(),
-		"affiliateLinks": s.GetAffiliateLinks(),
+		"websites":    s.GetWebsites(),
+		"socialMedia": s.GetSocialMediaLinks(),
 	}
 }

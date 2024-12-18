@@ -10,9 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/static/styles.css">
-    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body class="background-grid">
     <header>
@@ -22,11 +21,11 @@
 
     <div class="container golden-ratio-container">
         <section id="websites">
-            <h2><span class="material-icons">handyman</span> My Websites</h2>
+            <h2>My Websites</h2>
             {{range .Websites}}
             <div class="card">
                 <a href="{{.URL}}" class="btn">
-                    {{.Name}}
+                    <span class="material-icons">language</span> {{.Name}}
                 </a>
                 <p>Last Updated: {{ .FormattedLastUpdate }}</p>
                 <p class="description">{{.Description}}</p>
@@ -35,11 +34,11 @@
         </section>
 
         <section id="social-media">
-            <h2><span class="material-icons">groups</span> Connect With Me</h2>
+            <h2>Connect With Me</h2>
             {{range .SocialMedia}}
             <div class="card">
                 <a href="{{.URL}}" class="btn">
-                    {{.Platform}}
+                    <span class="material-icons">share</span> {{.Platform}}
                 </a>
                 <p>Last Updated: {{ .FormattedLastUpdate }}</p>
                 <p class="description">{{.Description}}</p>
@@ -47,20 +46,8 @@
             {{end}}
         </section>
 
-        <section id="affiliate-links">
-            <h2><span class="material-icons">link</span> Affiliate Links</h2>
-            {{range .AffiliateLinks}}
-            <div class="card">
-                <a href="{{.URL}}" class="btn">
-                    {{.Name}}
-                </a>
-                <p>Passive Income</p>    
-            </div>
-            {{end}}
-        </section>
-
           <section id="donate">
-            <h2><span class="material-icons">featured_seasion_and_gifts</span> Support My Work</h2>
+            <h2>Support My Work</h2>
             <div class="card">
             <p>If you find my work valuable, consider making a donation.</p>
             <a href="https://www.paypal.com/donate/?hosted_button_id=UZRCA43ELSJRE" class="btn">Make a Donation</a>

@@ -42,13 +42,6 @@ social_media:
     last_update: "2015-11-11"
     description: "Visual storytelling and daily life snapshots"
 
-affiliate_links:
-  - name: "Amazon Associates"
-    url: "https://www.amazon.com/shop/philgear"
-    - name: "Google Fi for Phone Plans"
-    url: "https://g.co/fi/r/56K0CN"
-
-
 features:
   enable_dark_mode: true
   enable_analytics: false

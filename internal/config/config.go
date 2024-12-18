@@ -16,7 +16,6 @@ type Config struct {
 	} `yaml:"server"`
 	Websites       []Website       `yaml:"websites"`
 	SocialMedia    []SocialMedia   `yaml:"social_media"`
-	AffiliateLinks []AffiliateLink `yaml:"affiliate_links"`
 }
 
 // Website represents a website entry in the configuration
@@ -33,12 +32,6 @@ type SocialMedia struct {
 	URL         string     `yaml:"url"`
 	LastUpdate  CustomTime `yaml:"last_update"`
 	Description string     `yaml:"description"`
-}
-
-// AffiliateLink represents an affiliate link entry in the configuration
-type AffiliateLink struct {
-	Name string `yaml:"name"`
-	URL  string `yaml:"url"`
 }
 
 // CustomTime is a wrapper for time.Time with custom YAML unmarshaling
