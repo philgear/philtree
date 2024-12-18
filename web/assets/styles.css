@@ -5,14 +5,38 @@
   --background-color: #FFFF00;
   --card-background-color: #FFFFFF;
   --text-color: #000000;
+  --secondary-text-color: #FFFFFF;
   --shadow-color: rgba(0, 0, 0, 0.1);
   --header-color: #FFFFFF;
   --grid-color: rgba(98, 0, 238, 0.1);
   --grid-size: 2rem;
 }
 
+::selection {
+  background-color: var(--secondary-color);
+  color: var(--secondary-text-color);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
+}
+
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Kanit', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
@@ -22,6 +46,10 @@ body {
   overflow-x: auto;
   overflow-y: auto;
   scroll-behavior: smooth;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M8 28L24 4 16 20H24L8 28Z' fill='white' stroke='%230000FF' stroke-width='2'/%3E%3C/svg%3E") 8 8, auto;
 }
 
 .background-grid {
@@ -63,7 +91,7 @@ body {
   margin: 0 auto;
   padding: var(--grid-size);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(12, 1fr);
   gap: 2rem;
 }
 
@@ -92,37 +120,66 @@ h2 {
   padding: 1.5rem;
   transition: transform 0.3s ease;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  transition: transform 0.3s ease;
   font-family: 'Kanit', sans-serif;
   margin-bottom: 2rem;
+  border: 2px solid var(--primary-color);
 }
 
 .card::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: repeating-linear-gradient(
-    45deg,
-    var(--tertiary-color),
-    var(--tertiary-color) 10px,
-    transparent 10px,
-    transparent 20px
-  );
-  opacity: 0.1;
-  transform: rotate(45deg);
+  top: 5px;
+  left: 5px;
+  right: -5px;
+  bottom: -5px;
+  background: var(--primary-color);
   z-index: -1;
+  transform: skew(2deg, 2deg);
+  transition: transform 0.3s ease;
+}
+
+.card:hover::before {
+  transform: skew(-2deg, -2deg);
+  color: var(--secondary-text-color);
 }
 
 .card:hover {
   font-family: 'Kanit', sans-serif;
-  transform: translateY(-5px);
+  transform: translateY(-5px) rotate(1deg);
+  color: var(--secondary-text-color);
 }
 
 .card:last-child {
   margin-bottom: 0;
+}
+
+.card {
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: perspective(1000px) rotateY(10deg) rotateX(5deg) translateY(-5px);
+}
+
+.card a, .card p {
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.card:hover {
+  background-color: var(--primary-color);
+}
+
+.card:hover a, .card:hover p {
+  color: var(--secondary-text-color);
+}
+
+/* Golden Ratio Grid */
+.golden-ratio-container {
+  display: grid;
+  gap: 1rem;
 }
 
 .btn {
@@ -138,6 +195,8 @@ h2 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M8 28L24 4 16 20H24L8 28Z' fill='white' stroke='%230000FF' stroke-width='2'/%3E%3C/svg%3E") 8 8, auto;
+
 }
 
 .btn .material-icons {
@@ -159,6 +218,8 @@ footer {
   padding: 1rem 0;
   margin-top: 2rem;
   clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+  width: 100%;
+  margin-top: auto;
   width: 100%;
 }
 

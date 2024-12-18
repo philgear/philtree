@@ -12,7 +12,9 @@
     pkgs.golangci-lint
   ];
   # Sets environment variables in the workspace
-  env = {};
+  env = {
+    PORT = "8080";
+  };
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
@@ -34,7 +36,7 @@
             "--signal" "SIGHUP"
             "-w" "."
             "-e" "go,html"
-            "-x" "go run main.go -addr localhost:$PORT"
+            "-x" "go run cmd/philtree/main.go -addr localhost:$PORT"
           ];
           manager = "web";
         };
