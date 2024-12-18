@@ -25,7 +25,6 @@ body {
 }
 
 .background-grid {
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -160,7 +159,7 @@ footer {
   padding: 1rem 0;
   margin-top: 2rem;
   clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
-  width: 100px;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
