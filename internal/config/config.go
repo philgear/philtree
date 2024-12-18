@@ -1,53 +1,77 @@
+// Package config provides configuration structures and loading functionality
 package config
 
 import (
-	"fmt"
 	"os"
+	"time"
 
 	"gopkg.in/yaml.v3"
 )
 
+// Config holds the application configuration
 type Config struct {
 	Server struct {
 		Port string `yaml:"port"`
 		Host string `yaml:"host"`
 	} `yaml:"server"`
-	Websites []struct {
-		Name string `yaml:"name"`
-		URL  string `yaml:"url"`
-	} `yaml:"websites"`
-	SocialMedia []struct {
-		Platform string `yaml:"platform"`
-		URL      string `yaml:"url"`
-	} `yaml:"social_media"`
-	AffiliateLinks []struct {
-		Name string `yaml:"name"`
-		URL  string `yaml:"url"`
-	} `yaml:"affiliate_links"`
-	Design struct {
-		PrimaryColor   string `yaml:"primary_color"`
-		SecondaryColor string `yaml:"secondary_color"`
-		TertiaryColor  string `yaml:"tertiary_color"`
-		FontFamily     string `yaml:"font_family"`
-	} `yaml:"design"`
-	Features struct {
-		EnableDarkMode  bool `yaml:"enable_dark_mode"`
-		EnableAnalytics bool `yaml:"enable_analytics"`
-	} `yaml:"features"`
+	Websites       []Website       `yaml:"websites"`
+	SocialMedia    []SocialMedia   `yaml:"social_media"`
+	AffiliateLinks []AffiliateLink `yaml:"affiliate_links"`
 }
 
-func Load() (*Config, error) {
-	config := &Config{}
+// Website represents a website entry in the configuration
+type Website struct {
+	Name        string     `yaml:"name"`
+	URL         string     `yaml:"url"`
+	LastUpdate  CustomTime `yaml:"last_update"`
+	Description string     `yaml:"description"`
+}
 
+// SocialMedia represents a social media entry in the configuration
+type SocialMedia struct {
+	Platform    string     `yaml:"platform"`
+	URL         string     `yaml:"url"`
+	LastUpdate  CustomTime `yaml:"last_update"`
+	Description string     `yaml:"description"`
+}
+
+// AffiliateLink represents an affiliate link entry in the configuration
+type AffiliateLink struct {
+	Name string `yaml:"name"`
+	URL  string `yaml:"url"`
+}
+
+// CustomTime is a wrapper for time.Time with custom YAML unmarshaling
+type CustomTime struct {
+	time.Time
+}
+
+// UnmarshalYAML implements custom YAML unmarshaling for CustomTime
+func (ct *CustomTime) UnmarshalYAML(value *yaml.Node) error {
+	var timeStr string
+	if err := value.Decode(&timeStr); err != nil {
+		return err
+	}
+
+	parsedTime, err := time.Parse("2006-01-02", timeStr)
+	if err != nil {
+		return err
+	}
+
+	ct.Time = parsedTime
+	return nil
+}
+
+// Load reads the configuration file and returns a Config struct
+func Load() (*Config, error) {
+	var cfg Config
 	file, err := os.ReadFile("configs/config.yaml")
 	if err != nil {
-		return nil, fmt.Errorf("error reading config file: %w", err)
+		return nil, err
 	}
-
-	err = yaml.Unmarshal(file, config)
+	err = yaml.Unmarshal(file, &cfg)
 	if err != nil {
-		return nil, fmt.Errorf("error unmarshaling config: %w", err)
+		return nil, err
 	}
-
-	return config, nil
+	return &cfg, nil
 }

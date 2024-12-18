@@ -1,36 +1,38 @@
+// Package handlers provides HTTP request handlers for the application
 package handlers
 
 import (
 	"html/template"
 	"net/http"
+	"time"
 
 	"github.com/philgear/philtree/internal/services"
 )
 
-type PageData struct {
-	Websites       []services.Link
-	SocialMedia    []services.Link
-	AffiliateLinks []services.Link
-}
-
+// HomeHandler returns an HTTP handler for the home page
 func HomeHandler(ls *services.LinkService) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		data := PageData{
-			Websites:       ls.GetWebsites(),
-			SocialMedia:    ls.GetSocialMediaLinks(),
-			AffiliateLinks: ls.GetAffiliateLinks(),
+		data := struct {
+			Websites       []services.Website
+			SocialMedia    []services.SocialMedia
+			AffiliateLinks []services.AffiliateLink
+			LastUpdated    string
+		}{
+			Websites:       ls.Websites,
+			SocialMedia:    ls.SocialMedia,
+			AffiliateLinks: ls.AffiliateLinks,
+			LastUpdated:    time.Now().Format("2006-01-02"),
 		}
 
 		tmpl, err := template.ParseFiles("web/templates/home.html")
 		if err != nil {
-			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			http.Error(w, "Failed to load template: "+err.Error(), http.StatusInternalServerError)
 			return
 		}
 
-		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		err = tmpl.Execute(w, data)
 		if err != nil {
-			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			http.Error(w, "Failed to render template: "+err.Error(), http.StatusInternalServerError)
 			return
 		}
 	}

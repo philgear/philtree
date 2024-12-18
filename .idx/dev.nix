@@ -8,6 +8,8 @@
     pkgs.go
     pkgs.nodejs_20
     pkgs.nodePackages.nodemon
+    pkgs.golint
+    pkgs.golangci-lint
   ];
   # Sets environment variables in the workspace
   env = {};

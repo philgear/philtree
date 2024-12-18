@@ -3,46 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phil's Link Tree</title>
+    <title>Phil Gear - Mentor | Action-Taker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body>
+<body class="background-grid">
     <header>
-        <h1>Phil's Link Tree</h1>
+        <h1>Phil Gear</h1>
+        <p>Mentor | Action-Taker</p>
     </header>
-    
-    <main>
+
+    <div class="container">
         <section id="websites">
             <h2>My Websites</h2>
-            <ul>
-                {{range .Websites}}
-                <li><a href="{{.URL}}">{{.Title}}</a></li>
-                {{end}}
-            </ul>
+            {{range .Websites}}
+            <div class="card">
+                <a href="{{.URL}}" class="btn">
+                    <span class="material-icons">language</span> {{.Name}}
+                </a>
+                <p>Last Updated: {{ .FormattedLastUpdate }}</p>
+                <p class="description">{{.Description}}</p>
+            </div>
+            {{end}}
         </section>
 
         <section id="social-media">
-            <h2>Social Media</h2>
-            <ul>
-                {{range .SocialMedia}}
-                <li><a href="{{.URL}}">{{.Title}}</a></li>
-                {{end}}
-            </ul>
+            <h2>Connect With Me</h2>
+            {{range .SocialMedia}}
+            <div class="card">
+                <a href="{{.URL}}" class="btn">
+                    <span class="material-icons">share</span> {{.Platform}}
+                </a>
+                <p>Last Updated: {{ .FormattedLastUpdate }}</p>
+                <p class="description">{{.Description}}</p>
+            </div>
+            {{end}}
         </section>
 
         <section id="affiliate-links">
             <h2>Affiliate Links</h2>
-            <ul>
-                {{range .AffiliateLinks}}
-                <li><a href="{{.URL}}">{{.Title}}</a></li>
-                {{end}}
-            </ul>
+            {{range .AffiliateLinks}}
+            <div class="card">
+                <a href="{{.URL}}" class="btn">
+                    <span class="material-icons">shopping_cart</span> {{.Name}}
+                </a>
+            </div>
+            {{end}}
         </section>
-    </main>
+
+          <section id="donate">
+            <h2>Support My Work</h2>
+            <p>If you find my work valuable, consider making a donation.</p>
+            <!-- Add donation button or link to a payment platform -->
+            <a href="/donate" class="btn">Make a Donation</a>
+          </section>
+
+    </div>
 
     <footer>
-        <p>&copy; 2024 Phil's Link Tree</p>
+        <p>&copy; 2024 Phil Gear. Dedicated to helping others and taking action.</p>
     </footer>
+
+
 </body>
 </html>

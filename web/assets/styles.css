@@ -1,130 +1,171 @@
 :root {
-    --primary-color: #6200EE;
-    --secondary-color: #03DAC6;
-    --background-color: #FFFFFF;
-    --text-color: #000000;
-    --card-background: #F5F5F5;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+  --primary-color: #0000FF;
+  --secondary-color: #FF0000;
+  --tertiary-color: #FFFF00;
+  --background-color: #FFFF00;
+  --card-background-color: #FFFFFF;
+  --text-color: #000000;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --header-color: #FFFFFF;
+  --grid-color: rgba(98, 0, 238, 0.1);
+  --grid-size: 2rem;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.background-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-image: 
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: subtleMove 60s linear infinite;
+}
+
+.card .last-update {
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.card .description {
+  font-size: 0.9em;
+  margin-top: 0.5rem;
+}
+
+@keyframes subtleMove {
+  0% {
+    background-position: 0 0;
   }
-  
-  body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    line-height: 1.6;
+  100% {
+    background-position: 50px 50px;
   }
-  
-  header {
-    background-color: var(--primary-color);
-    color: white;
-    text-align: center;
-    padding: 2rem 0;
-    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--grid-size);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+header {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  text-align: center;
+  padding: 2rem 0;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+h1 {
+  font-family: 'Kanit', sans-serif;
+  color: var(--header-color);
+}
+
+h2 {
+  font-family: 'Kanit', sans-serif;
+  color: var(--primary-color);
+}
+
+.card {
+  background-color: var(--card-background-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  padding: 1.5rem;
+  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Kanit', sans-serif;
+  margin-bottom: 2rem;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--tertiary-color),
+    var(--tertiary-color) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  opacity: 0.1;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+.card:hover {
+  font-family: 'Kanit', sans-serif;
+  transform: translateY(-5px);
+}
+
+.card:last-child {
+  margin-bottom: 0;
+}
+
+.btn {
+  background-color: var(--secondary-color);
+  color: var(--background-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 0.5rem;
+  font-weight: bold;
+  font-family: 'Kanit', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn .material-icons {
+  margin-right: 0.5rem;
+}
+
+.btn:hover, .btn:focus {
+  background-color: var(--tertiary-color);
+  color: var(--primary-color);
+  transform: scale(1.05);
+  font-family: 'Kanit', sans-serif;
+}
+
+footer {
+  font-family: 'Kanit', sans-serif;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 2rem;
+  clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+  width: 100px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: calc(var(--grid-size) / 2);
+    grid-template-columns: 1fr;
   }
-  
-  h1 {
-    margin: 0;
-    font-size: 2.5rem;
-  }
-  
-  main {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-  }
-  
-  section {
-    margin-bottom: 2rem;
-    background-color: var(--card-background);
-    border-radius: 4px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px var(--shadow-color);
-  }
-  
-  h2 {
-    color: var(--primary-color);
-    margin-top: 0;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    margin-bottom: 1rem;
-  }
-  
-  a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  
-  a:hover {
-    color: var(--secondary-color);
-  }
-  
-  footer {
-    text-align: center;
-    padding: 1rem 0;
-    background-color: var(--primary-color);
-    color: white;
-  }
-  
-  /* Sierpiński-inspired background */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    background-image: 
-      linear-gradient(60deg, var(--secondary-color) 25%, transparent 25%),
-      linear-gradient(120deg, var(--secondary-color) 25%, transparent 25%);
-    background-size: 60px 60px;
-    background-position: 0 0, 30px 0;
-    opacity: 0.1;
-  }
-  
-  /* Material Design-inspired button style */
-  .btn {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 500;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 4px var(--shadow-color);
-  }
-  
-  .btn:hover {
-    background-color: var(--secondary-color);
-    box-shadow: 0 4px 8px var(--shadow-color);
-  }
-  
-  /* Responsive design */
-  @media (max-width: 600px) {
-    header {
-      padding: 1rem 0;
-    }
-  
-    h1 {
-      font-size: 2rem;
-    }
-  
-    main {
-      margin: 1rem auto;
-    }
-  
-    section {
-      padding: 1rem;
-    }
-  }
+}

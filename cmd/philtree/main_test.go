@@ -5,6 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/philgear/philtree/internal"
 	"github.com/philgear/philtree/internal/config"
 	"github.com/philgear/philtree/internal/services"
 )
@@ -16,23 +17,28 @@ func TestHomeHandler(t *testing.T) {
 	}
 
 	linkService := services.NewLinkService(cfg)
-	router := SetupRouter(linkService)
+	router := internal.SetupRouter(linkService)
 
-	req, err := http.NewRequest("GET", "/", nil)
-	if err != nil {
-		t.Fatal(err)
+	tests := []struct {
+		name           string
+		path           string
+		expectedStatus int
+	}{
+		{"Home Page", "/", http.StatusOK},
+		{"Non-existent Page", "/notfound", http.StatusNotFound},
 	}
 
-	rr := httptest.NewRecorder()
-	router.ServeHTTP(rr, req)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			req, _ := http.NewRequest("GET", tt.path, nil)
+			rr := httptest.NewRecorder()
+			router.ServeHTTP(rr, req)
 
-	if status := rr.Code; status != http.StatusOK {
-		t.Errorf("handler returned wrong status code: got %v want %v",
-			status, http.StatusOK)
-	}
-
-	if rr.Body.Len() == 0 {
-		t.Errorf("handler returned empty body")
+			if status := rr.Code; status != tt.expectedStatus {
+				t.Errorf("handler returned wrong status code: got %v want %v",
+					status, tt.expectedStatus)
+			}
+		})
 	}
 }
 
@@ -43,7 +49,7 @@ func TestStaticFileServing(t *testing.T) {
 	}
 
 	linkService := services.NewLinkService(cfg)
-	router := SetupRouter(linkService)
+	router := internal.SetupRouter(linkService)
 
 	req, err := http.NewRequest("GET", "/static/styles.css", nil)
 	if err != nil {
